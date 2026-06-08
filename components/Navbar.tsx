@@ -5,7 +5,7 @@ import { UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-muted flex justify-between items-center px-4 py-6 md:px-12 lg:px-16">
+    <nav className="w-full bg-muted flex justify-between items-center px-8 py-6 md:px-12 lg:px-16">
       <div>
         <LinksDropdown />
       </div>

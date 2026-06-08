@@ -6,10 +6,10 @@ import Link from "next/link";
 const HomePage = () => {
   return (
     <main>
-      <header className="max-w-6xl mx-auto px-4 py-8 sm:px-6">
+      <header className="max-w-[1280px] mx-auto px-4 py-8 sm:px-6">
         <Image src={Logo} alt="logo" />
       </header>
-      <section className="max-w-6xl mx-auto h-screen -mt-[120px]  px-4 py-8 sm:px-8 grid sm:grid-cols-[1fr,400px] items-center justify-center">
+      <section className="max-w-[1280px] mx-auto h-screen -mt-[120px]  px-4 py-8 md:px-8 grid sm:grid-cols-[1fr,300px] md:grid-cols-[1fr,350px] lg:grid-cols-[1fr,400px] items-center justify-center gap-10">
         <div>
           <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-wider">
             Jobify <span className="text-primary">Tracking</span> App
@@ -24,7 +24,11 @@ const HomePage = () => {
             <Link href={"/add-job"}>Get start</Link>
           </Button>
         </div>
-        <Image src={Main} alt="main-logo" className="sm:block hidden" />
+        <Image
+          src={Main}
+          alt="main-logo"
+          className="sm:block md:block hidden"
+        />
       </section>
     </main>
   );

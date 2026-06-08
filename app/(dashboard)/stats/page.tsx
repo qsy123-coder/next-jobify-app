@@ -1,7 +1,7 @@
 import React from "react";
 
 const StatusPage = () => {
-  return <div></div>;
+  return <div>fsf</div>;
 };
 
 export default StatusPage;

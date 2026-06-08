@@ -21,7 +21,7 @@ const HomePage = () => {
             asperiores fugiat.
           </p>
           <Button asChild className="mt-4 ">
-            <Link href={"/find-job"}>Get start</Link>
+            <Link href={"/add-job"}>Get start</Link>
           </Button>
         </div>
         <Image src={Main} alt="main-logo" className="sm:block hidden" />

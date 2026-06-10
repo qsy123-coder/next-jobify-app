@@ -1,7 +1,8 @@
+import CreateAndEditJobForm from "@/components/CreateAndEditJobForm";
 import React from "react";
 
 const AddJobPage = () => {
-  return <div>add-job page</div>;
+  return <CreateAndEditJobForm />;
 };
 
 export default AddJobPage;

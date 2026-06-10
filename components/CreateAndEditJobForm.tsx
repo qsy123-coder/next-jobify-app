@@ -1,55 +1,49 @@
 "use client";
 
-import { z } from "zod";
-import React from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-const formSchema = z.object({
-  username: z.string().min(2).max(50),
-});
+  createAndEditJobSchema,
+  CreateAndEditJobType,
+  JobMode,
+  JobStatus,
+} from "@/utils/types";
+import { useForm } from "react-hook-form";
+import { Form } from "./ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "./ui/button";
+import { SelectInput, TextInput } from "./FormComponent";
 
 export default function CreateAndEditJobForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<CreateAndEditJobType>({
+    resolver: zodResolver(createAndEditJobSchema),
     defaultValues: {
-      username: "",
+      location: "",
+      position: "",
+      company: "",
+      status: JobStatus.Pending,
+      mod: JobMode.FullTime,
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = (values: CreateAndEditJobType) => {
     console.log(values);
-  }
+  };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="bg-muted p-10 rounded-sm"
+      >
+        <h2 className="font-semibold text-4xl tracking-wide mb-4">Add Job</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 items-start  ">
+          <TextInput name="location" />
+          <TextInput name="position" />
+          <TextInput name="company" />
+          <SelectInput name="status" items={Object.values(JobStatus)} />
+          <SelectInput name="mod" items={Object.values(JobMode)} />
+          <Button type="submit" className="self-end ">
+            提交
+          </Button>
+        </div>
       </form>
     </Form>
   );

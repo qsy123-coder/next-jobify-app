@@ -36,6 +36,7 @@ export const TextInput = ({ name }: TextInputProps) => {
           <FormControl>
             <Input placeholder={`${name}...`} {...field} />
           </FormControl>
+          <FormMessage />
         </FormItem>
       )}
     />
@@ -70,6 +71,8 @@ export const SelectInput = ({ name, items }: SelectInputProps) => {
               ))}
             </SelectContent>
           </Select>
+
+          <FormMessage />
         </FormItem>
       )}
     />

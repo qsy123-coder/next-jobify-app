@@ -11,6 +11,11 @@ import { Form } from "./ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "./ui/button";
 import { SelectInput, TextInput } from "./FormComponent";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useToast } from "./ui/use-toast";
+import { CreateJobAction } from "@/utils/actions";
+import { Description } from "@radix-ui/react-toast";
+import { useRouter } from "next/navigation";
 
 export default function CreateAndEditJobForm() {
   const form = useForm<CreateAndEditJobType>({
@@ -23,9 +28,26 @@ export default function CreateAndEditJobForm() {
       mod: JobMode.FullTime,
     },
   });
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+  const router = useRouter();
+  const { mutate, isPending } = useMutation({
+    mutationFn: (values: CreateAndEditJobType) => CreateJobAction(values),
+    onSuccess: (data) => {
+      if (!data) {
+        toast({ description: "Data is null" });
+        // console.log("fff");
+      }
+      toast({ description: "Job create successfully" });
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["stats"] });
+      queryClient.invalidateQueries({ queryKey: ["charts"] });
+      router.push("/jobs");
+    },
+  });
 
   const onSubmit = (values: CreateAndEditJobType) => {
-    console.log(values);
+    mutate(values);
   };
   return (
     <Form {...form}>
@@ -40,8 +62,8 @@ export default function CreateAndEditJobForm() {
           <TextInput name="company" />
           <SelectInput name="status" items={Object.values(JobStatus)} />
           <SelectInput name="mod" items={Object.values(JobMode)} />
-          <Button type="submit" className="self-end ">
-            提交
+          <Button type="submit" className="self-end " disabled={isPending}>
+            {isPending ? "提交中..." : "提交"}
           </Button>
         </div>
       </form>

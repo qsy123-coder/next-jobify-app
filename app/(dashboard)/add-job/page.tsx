@@ -10,7 +10,7 @@ const AddJobPage = () => {
   const queryClient = new QueryClient();
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <CreateAndEditJobForm />;
+      <CreateAndEditJobForm />
     </HydrationBoundary>
   );
 };

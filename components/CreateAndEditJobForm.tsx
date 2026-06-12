@@ -14,7 +14,6 @@ import { SelectInput, TextInput } from "./FormComponent";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "./ui/use-toast";
 import { CreateJobAction } from "@/utils/actions";
-import { Description } from "@radix-ui/react-toast";
 import { useRouter } from "next/navigation";
 
 export default function CreateAndEditJobForm() {

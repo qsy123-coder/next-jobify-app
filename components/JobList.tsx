@@ -22,7 +22,7 @@ const JobList = () => {
   if (isPending) return <div>加载中....</div>;
   if (jobs.length < 1) return <div>There is no jobs found...</div>;
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 items-center gap-6 bg-muted p-10 ">
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 items-center gap-6  p-10 ">
       {jobs.map((job) => {
         return <JobCard key={job.id} job={job} />;
       })}
